@@ -1,1 +1,1 @@
-# -ProgrammingWithMashFullReactNativeCourse
+# ProgrammingWithMashFullReactNativeCourse
