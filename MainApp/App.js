@@ -17,6 +17,12 @@ import {
   RefreshControl,
   FlatList,
   SectionList,
+  TextInput,
+  TouchableOpacityBase,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Pressable,
 } from 'react-native';
 /**
  * 
@@ -24,66 +30,110 @@ import {
  */
 const App = () => {
 
-  const [DATA, setItems] = useState([
-    {
-      title: 'Title 1',
-      data: ['Item 1-1', 'Item 1-2'],
-    },
-  ]);
-  const [Refreshing, setRefreshing] = useState(false);
+  const [name, setName] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  const onRefresh = () => {
-    setRefreshing(true);
-    let req_index;
-    DATA.forEach((value, index) => {
-      req_index = value.title.split(' ');
-      req_index = req_index[1];
-    })
-    req_index = ++req_index;
-    setItems([...DATA, {
-      title: 'Title ' + req_index,
-      data: ['Item ' + req_index + '-1', 'Item ' + req_index + '-2'],
-    }]);
-    setRefreshing(false);
+  const onPressHandler = () => {
+    setSubmitted(!submitted);
   }
 
   return (
-    <SectionList
-      keyExtractor={(item, index) => index.toString()}
-      sections={DATA}
-      renderItem={({ item }) => (//item refers to internal array items
-        <Text style={styles.text}>{item}</Text>
-      )}
-      renderSectionHeader={({ section }) => (
-        <View style={styles.item}>
-          <Text style={styles.text}>{section.title}</Text>
-        </View>
-      )}
-      refreshControl={
-        <RefreshControl
-          refreshing={Refreshing}
-          onRefresh={onRefresh}
-          colors={['#0000ff']}
+    <View
+      style={styles.body}
+    >
+      <View
+        style={styles.input1}
+      >
+        <Text style={styles.text}>Please enter your name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='e.g. John'
+          onChangeText={(value) => { setName(value) }}
+          multiline={false}
+          keyboardType='numeric'
+          maxLength={5}
+          editable={true}
+          secureTextEntry={false}
         />
-      }
-    />
+        <Button
+          title={submitted ? 'Clear' : 'Register'}
+          onPress={onPressHandler}
+          disabled={false}
+          color='#00f'
+        />
+        <TouchableOpacity
+          activeOpacity={0.2} //visibility of button between 0 to 1 when clicking
+          onPress={onPressHandler}
+          style={styles.button}
+        >
+          <Text style={styles.text}>
+            {submitted ? 'Clear' : 'Register'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableHighlight
+          activeOpacity={0.5}
+          onPress={onPressHandler}
+          style={styles.button}
+          underlayColor='#ddd' //color shown to user on clicking button
+        >
+          <Text style={styles.text}>
+            {submitted ? 'Clear' : 'Register'}
+          </Text>
+        </TouchableHighlight>
+        <TouchableWithoutFeedback //no styling can be done in this
+          onPress={onPressHandler}
+        >
+          <View style={styles.button}>
+            <Text style={styles.text}>
+              {submitted ? 'Clear' : 'Register'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        {/* PRESSABLE IS RECOMMENDED */}
+        <Pressable //styling can be done in this but without any feedback like that in higlight or opacity, to generate feedback you can style it using styles array and arrow function as below
+          onPress={onPressHandler}
+          style={({ pressed }) => [
+            { backgroundColor: pressed ? '#ddd' : '#0f0' },
+            styles.button,
+          ]}
+        >
+          <Text style={styles.text}>
+            {submitted ? 'Clear' : 'Register'}
+          </Text>
+        </Pressable>
+        {
+          submitted ? <Text style={styles.text}>You are registered successfully as '{name}'</Text> : null
+        }
+
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-  },
-  item: {
-    margin: 10,
-    backgroundColor: '#00ff00',
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    borderLeftWidth: 20,
+    borderLeftColor: '#ffffff',
   },
   text: {
-    fontSize: 100,
-    fontStyle: 'italic',
+    fontSize: 20,
     color: '#000000',
+  },
+  input1: {
+    width: '90%',
+    flex: 1,
+  },
+  input: {
+    borderWidth: 1,
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  button: {
+    backgroundColor: '#0f0',
+    marginVertical: 10,
+    alignItems: 'center',
   },
 });
 
