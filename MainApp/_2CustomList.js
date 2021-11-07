@@ -24,38 +24,26 @@
   */
  const App = () => {
  
-   const [Items, setItems] = useState([
-     { name: 'Item 1' },
-     { name: 'Item 2' },
-     { name: 'Item 3' },
-     { name: 'Item 4' },
-     { name: 'Item 5' },
-     { name: 'Item 6' },
-     { name: 'Item 7' },
-   ]);
-   const DATA = [
+   const [DATA, setItems] = useState([
      {
        title: 'Title 1',
-       data: ['Item 1-1', 'Item 1-2', 'Item 1-3'],
+       data: ['Item 1-1', 'Item 1-2'],
      },
-     {
-       title: 'Title 2',
-       data: ['Item 2-1', 'Item 2-2', 'Item 2-3'],
-     },
-     {
-       title: 'Title 3',
-       data: ['Item 3-1'],
-     },
-     {
-       title: 'Title 4',
-       data: ['Item 4-1', 'Item 4-2'],
-     },
-   ];
+   ]);
    const [Refreshing, setRefreshing] = useState(false);
  
    const onRefresh = () => {
      setRefreshing(true);
-     setItems([...Items, { name: 'Item8' }]);// three dots with array state name will load its assigned value and then add the new item to that state array
+     let req_index;
+     DATA.forEach((value, index) => {
+       req_index = value.title.split(' ');
+       req_index = req_index[1];
+     })
+     req_index = ++req_index;
+     setItems([...DATA, {
+       title: 'Title ' + req_index,
+       data: ['Item ' + req_index + '-1', 'Item ' + req_index + '-2'],
+     }]);
      setRefreshing(false);
    }
  
@@ -64,9 +52,9 @@
        keyExtractor={(item, index) => index.toString()}
        sections={DATA}
        renderItem={({ item }) => (//item refers to internal array items
-           <Text style={styles.text}>{item}</Text>
+         <Text style={styles.text}>{item}</Text>
        )}
-       renderSectionHeader={({section})=>(
+       renderSectionHeader={({ section }) => (
          <View style={styles.item}>
            <Text style={styles.text}>{section.title}</Text>
          </View>

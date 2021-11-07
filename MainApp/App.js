@@ -34,9 +34,15 @@ const App = () => {
 
   const onRefresh = () => {
     setRefreshing(true);
+    let req_index;
+    DATA.forEach((value, index) => {
+      req_index = value.title.split(' ');
+      req_index = req_index[1];
+    })
+    req_index = ++req_index;
     setItems([...DATA, {
-      title: 'Title 1',
-      data: ['Item 1-1', 'Item 1-2'],
+      title: 'Title ' + req_index,
+      data: ['Item ' + req_index + '-1', 'Item ' + req_index + '-2'],
     }]);
     setRefreshing(false);
   }
