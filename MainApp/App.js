@@ -27,6 +27,8 @@ import {
   ToastAndroid,
   Modal,
 } from 'react-native';
+import Header from './Header.js';
+import MashButton from './CustomButtons';
 /**
  * 
  * @returns state is mutable but props are immutable.
@@ -49,6 +51,7 @@ const App = () => {
     <View
       style={styles.body}
     >
+      <Header />
       <Modal
         visible={showWarning}
         transparent
@@ -88,17 +91,17 @@ const App = () => {
           editable={true}
           secureTextEntry={false}
         />
-        <Pressable
-          onPress={onPressHandler}
-          style={({ pressed }) => [
-            { backgroundColor: pressed ? '#ddd' : '#0f0' },
-            styles.button,
-          ]}
-        >
-          <Text style={styles.text}>
-            {submitted ? 'Clear' : 'Register'}
-          </Text>
-        </Pressable>
+        <MashButton
+          title={submitted ? 'Clear' : 'Register'}
+          onPressFunction={onPressHandler}
+          color='#0f0'
+        />
+        <MashButton
+          title={'Submit'}
+          onPressFunction={onPressHandler}
+          color='#0ff'
+          style={{ margin: 10 }}
+        />
         {
           submitted ? <Text style={styles.text}>You are registered successfully as '{name}'</Text> : null
         }
