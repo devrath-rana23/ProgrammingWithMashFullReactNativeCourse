@@ -25,7 +25,6 @@ import {
   Pressable,
   Alert,
   ToastAndroid,
-  Modal,
 } from 'react-native';
 /**
  * 
@@ -35,13 +34,16 @@ const App = () => {
 
   const [name, setName] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [showWarning, setShowWarning] = useState(false);
 
   const onPressHandler = () => {
     if (name.length > 3) {
       setSubmitted(!submitted);
     } else {
-      setShowWarning(true);
+      ToastAndroid.showWithGravityAndOffset('The name must be longer than 3 characters',
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        100, 200
+      );//SHORT=>2 seconds, LONG=>3.5 seconds  
     }
   }
 
@@ -49,32 +51,6 @@ const App = () => {
     <View
       style={styles.body}
     >
-      <Modal
-        visible={showWarning}
-        transparent
-        animationType='slide'
-        hardwareAccelerated
-        onRequestClose={() => setShowWarning(false)}//now on pressing back button modal closes
-      >
-        <View style={styles.centred_warning_view}>
-          <View style={styles.warning_modal}>
-            <View style={styles.warning_modal_title}>
-              <Text style={styles.text}>Warning!</Text>
-            </View>
-            <View style={styles.warning_modal_body}>
-              <Text style={styles.text}>The name must be longer than 3 characters</Text>
-            </View>
-            <Pressable
-              onPress={() => setShowWarning(false)}
-              style={styles.warning_modal_button}
-              android_ripple={{ color: '#fff', }}
-            >
-              <Text style={styles.text}>Ok</Text>
-            </Pressable>
-          </View>
-        </View>
-
-      </Modal>
       <View
         style={styles.input1}
       >
@@ -118,7 +94,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     color: '#000000',
-    textAlign: 'center',
   },
   input1: {
     width: '90%',
@@ -133,38 +108,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#0f0',
     marginVertical: 10,
     alignItems: 'center',
-  },
-  centred_warning_view: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#00000099'//by putting number between 0 to 99 at the end of color hexcode determine the transparent value of that hex color
-  },
-  warning_modal: {
-    backgroundColor: '#ffffff',
-    height: 300,
-    width: 300,
-    borderColor: '#000',
-    borderRadius: 20,
-  },
-  warning_modal_title: {
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ff0',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  warning_modal_body: {
-    height: 200,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  warning_modal_button: {
-    backgroundColor: '#00ffff',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    height: 50,
   },
 });
 
