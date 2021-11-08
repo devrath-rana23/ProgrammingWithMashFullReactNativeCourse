@@ -12,14 +12,15 @@ const Header = (props) => {
 const styles = StyleSheet.create({
     view: {
         height: 50,
+        width:'100%',
         backgroundColor: '#00f',
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
     text: {
         fontSize: 20,
         color: '#fff',
+        fontWeight:'bold',
     },
 });
 
