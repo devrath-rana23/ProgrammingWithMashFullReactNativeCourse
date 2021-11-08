@@ -23,7 +23,10 @@
    TouchableHighlight,
    TouchableWithoutFeedback,
    Pressable,
+   Image,
+   ImageBackground,
  } from 'react-native';
+ import { ERROR_IMAGE, DONE_IMAGE } from './src/images/index.js'
  /**
   * 
   * @returns state is mutable but props are immutable.
@@ -38,8 +41,9 @@
    }
  
    return (
-     <View
+     <ImageBackground
        style={styles.body}
+       source={{ uri: 'https://i.ytimg.com/vi/z8wrRRR7_qU/maxresdefault.jpg' }}
      >
        <View
          style={styles.input1}
@@ -102,11 +106,15 @@
            </Text>
          </Pressable>
          {
-           submitted ? <Text style={styles.text}>You are registered successfully as '{name}'</Text> : null
+           submitted ? <View style={styles.message_container}> <Text style={styles.text}>You are registered successfully as '{name}'</Text> <Image style={styles.image} source={DONE_IMAGE}
+             resizeMode='stretch'
+           /></View> : <Image style={styles.image} source={{ uri: 'https://i.ytimg.com/vi/z8wrRRR7_qU/maxresdefault.jpg' }}
+             resizeMode='stretch'
+             blurRadius={5}
+           />
          }
- 
        </View>
-     </View>
+     </ImageBackground>
    );
  };
  
@@ -134,6 +142,15 @@
      backgroundColor: '#0f0',
      marginVertical: 10,
      alignItems: 'center',
+   },
+   message_container: {
+     flex: 1,
+     alignItems: 'center',
+     justifyContent: 'center',
+   },
+   image: {
+     height: 20,
+     width: 20,
    },
  });
  
