@@ -1,1 +1,1 @@
-export const {ERROR_IMAGE} = require('./error.jpeg');
+export const ERROR_IMAGE = require('./error.jpeg');

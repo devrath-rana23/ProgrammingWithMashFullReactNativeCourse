@@ -24,7 +24,7 @@ import {
   TouchableWithoutFeedback,
   Pressable,
 } from 'react-native';
-import {ERRROR_IMAGE} from './src/images/index.js'
+import {ERROR_IMAGE} from './src/images/index.js'
 /**
  * 
  * @returns state is mutable but props are immutable.
@@ -104,7 +104,7 @@ const App = () => {
         </Pressable>
         <View style={styles.message_container}>
           {
-            submitted ? <Text style={styles.text}>You are registered successfully as '{name}'</Text> : <Image style={styles.image} source={ERRROR_IMAGE} 
+            submitted ? <Text style={styles.text}>You are registered successfully as '{name}'</Text> : <Image style={styles.image} source={ERROR_IMAGE} 
             resizeMode='stretch'
             />
           }
