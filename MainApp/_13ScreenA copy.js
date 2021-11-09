@@ -11,11 +11,6 @@ const ScreenA = ({ navigation }) => {
   const onPressHandler = () => {
     navigation.navigate('Screen_B');
   }
-  const onPressHandlerForDrawer = () => {
-    // navigation.openDrawer();
-    // navigation.closeDrawer();
-    navigation.toggleDrawer();
-  }
 
   return (
     <View style={styles.body}>
@@ -30,16 +25,6 @@ const ScreenA = ({ navigation }) => {
       >
         <Text style={styles.text}>
           Screen B
-        </Text>
-      </Pressable>
-      <Pressable
-        onPress={onPressHandlerForDrawer}
-        style={
-          ({ pressed }) => ({ backgroundColor: pressed ? '#ddd' : '#0f0' })
-        }
-      >
-        <Text style={styles.text}>
-          Toggle drawer
         </Text>
       </Pressable>
     </View>

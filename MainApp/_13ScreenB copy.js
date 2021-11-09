@@ -6,21 +6,16 @@ import {
   Pressable,
 } from 'react-native';
 
-const ScreenA = ({ navigation }) => {
+const ScreenB = ({ navigation }) => {
 
   const onPressHandler = () => {
-    navigation.navigate('Screen_B');
-  }
-  const onPressHandlerForDrawer = () => {
-    // navigation.openDrawer();
-    // navigation.closeDrawer();
-    navigation.toggleDrawer();
+    navigation.goBack();
   }
 
   return (
     <View style={styles.body}>
       <Text style={styles.text}>
-        Screen A
+        Screen B
       </Text>
       <Pressable
         onPress={onPressHandler}
@@ -29,17 +24,7 @@ const ScreenA = ({ navigation }) => {
         }
       >
         <Text style={styles.text}>
-          Screen B
-        </Text>
-      </Pressable>
-      <Pressable
-        onPress={onPressHandlerForDrawer}
-        style={
-          ({ pressed }) => ({ backgroundColor: pressed ? '#ddd' : '#0f0' })
-        }
-      >
-        <Text style={styles.text}>
-          Toggle drawer
+          Go back to Screen A
         </Text>
       </Pressable>
     </View>
@@ -63,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScreenA;
+export default ScreenB;
