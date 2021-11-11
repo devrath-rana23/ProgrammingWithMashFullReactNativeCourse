@@ -6,13 +6,17 @@ import {
   Pressable,
 } from 'react-native';
 
-const ScreenA = ({ navigation }) => {
+const ScreenA = ({ navigation, route }) => {
 
+  const { Message } = route.params;
 
   const onPressHandler = () => {
-    navigation.navigate('Screen_B',);
+    navigation.navigate('Screen_B', { ItemName: 'Item from Screen A', ItemId: 12 }); //When we navigate using Drawer it will give error
+    // navigation.navigate('Screen_B');
   }
   const onPressHandlerForDrawer = () => {
+    // navigation.openDrawer();
+    // navigation.closeDrawer();
     navigation.toggleDrawer();
   }
 
@@ -41,6 +45,9 @@ const ScreenA = ({ navigation }) => {
           Toggle drawer
         </Text>
       </Pressable>
+      <Text style={styles.text}>
+        {route.params?.Message}
+      </Text>
     </View>
   );
 }

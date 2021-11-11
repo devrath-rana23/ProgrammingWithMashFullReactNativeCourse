@@ -6,20 +6,23 @@ import {
   Pressable,
 } from 'react-native';
 
-const ScreenA = ({ navigation }) => {
+const ScreenB = ({ navigation, route }) => {
 
-
+  const { ItemName, ItemId } = route.params;
   const onPressHandler = () => {
-    navigation.navigate('Screen_B',);
+    // navigation.goBack();
+    navigation.navigate('Screen_A', { Message: 'Message from Screen B', }); //When we navigate using Drawer it will give error
+
   }
-  const onPressHandlerForDrawer = () => {
-    navigation.toggleDrawer();
+  const onPressUpdateIdHandler = () => {
+    navigation.setParams({ ItemId: 14 });
   }
+
 
   return (
     <View style={styles.body}>
       <Text style={styles.text}>
-        Screen A
+        Screen B
       </Text>
       <Pressable
         onPress={onPressHandler}
@@ -28,19 +31,25 @@ const ScreenA = ({ navigation }) => {
         }
       >
         <Text style={styles.text}>
-          Screen B
+          Go back to Screen A
         </Text>
       </Pressable>
       <Pressable
-        onPress={onPressHandlerForDrawer}
+        onPress={onPressUpdateIdHandler}
         style={
           ({ pressed }) => ({ backgroundColor: pressed ? '#ddd' : '#0f0' })
         }
       >
         <Text style={styles.text}>
-          Toggle drawer
+          Update Id
         </Text>
       </Pressable>
+      <Text style={styles.text}>
+        {ItemName}
+      </Text>
+      <Text style={styles.text}>
+        ID:{ItemId}
+      </Text>
     </View>
   );
 }
@@ -62,4 +71,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScreenA;
+export default ScreenB;

@@ -49,6 +49,7 @@ const App = () => {
               />
             )
           }}
+        // initialParams={{ItemName: 'Item from Drawer', ItemId:12}}//to send parameters from drawer
         />
         <Drawer.Screen
           name='Screen_B'

@@ -10,6 +10,7 @@ const ScreenB = ({ navigation }) => {
 
   const onPressHandler = () => {
     navigation.goBack();
+
   }
 
   return (
