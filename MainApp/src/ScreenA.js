@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,12 +8,30 @@ import {
 
 const ScreenA = ({ navigation }) => {
 
+const Users=[{
+  id:1,
+  name:'User A'
+},
+{
+  id:2,
+  name:'User B'
+},
+{
+  id:3,
+  name:'User C'
+},
+];
+
+const [name, setName] =  useState('');
 
   const onPressHandler = () => {
     navigation.navigate('Screen_B',);
   }
   const onPressHandlerForDrawer = () => {
-    navigation.toggleDrawer();
+    // navigation.toggleDrawer();
+    for(let user of Users){
+      setName(user.name);
+    }
   }
 
   return (
@@ -38,8 +56,9 @@ const ScreenA = ({ navigation }) => {
         }
       >
         <Text style={styles.text}>
-          Toggle drawer
+          Get the last user
         </Text>
+        <Text>{name}</Text>
       </Pressable>
     </View>
   );
@@ -53,9 +72,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
-    fontWeight: 'bold',
     color: '#000',
     margin: 10,
+    fontFamily: 'DancingScript-Regular',
   },
   button: {
     borderRadius: 50,
