@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, Text, StyleSheet } from 'react-native';
 
-const MashButton = (props) => {
+const CustomButton = (props) => {
     return (
         <Pressable
             onPress={props.onPressFunction}
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MashButton;
+export default CustomButton;
