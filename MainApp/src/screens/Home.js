@@ -11,7 +11,7 @@ import GlobalStyle from '../utils/GlobalStyle';
 import CustomButton from '../utils/CustomButtons';
 import SQLite from 'react-native-sqlite-storage';
 import { useSelector, useDispatch } from 'react-redux';
-import {setName, setAge} from '../redux/actions'
+import {setName, setAge, increaseAge} from '../redux/actions'
 
 const db = SQLite.openDatabase(
   {
@@ -55,8 +55,8 @@ const Home = ({ navigation, route }) => {
             if (len > 0) {
               var userName = results.rows.item(0).Name;
               var userAge = results.rows.item(0).Age;
-              dispatch(setName(name));
-              dispatch(setAge(age));
+              dispatch(setName(userName));
+              dispatch(setAge(userAge));
             }
           }
         )
@@ -134,6 +134,11 @@ const Home = ({ navigation, route }) => {
         title='Remove'
         color='#f40100'
         onPressFunction={removeData}
+      />
+      <CustomButton
+        title='Increase Age'
+        color='#0080ff'
+        onPressFunction={()=>{dispatch(increaseAge())}}
       />
     </View>
   );

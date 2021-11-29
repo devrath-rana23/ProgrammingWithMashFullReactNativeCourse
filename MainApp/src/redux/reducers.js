@@ -1,4 +1,4 @@
-import { SET_USER_NAME, SET_USER_AGE } from './actions';
+import { SET_USER_NAME, SET_USER_AGE, INCREASE_AGE } from './actions';
 
 // default value of state
 const initialState = {
@@ -16,8 +16,10 @@ function userReducer(state=initialState, action){//whenever these actions like S
         // Finally we return state without manipulation by default.
         case SET_USER_NAME:
             return { ...state, name: action.payload };
-        case SET_USER_NAME:
-            return { ...state, age: action.payload };                                    
+        case SET_USER_AGE:
+            return { ...state, age: action.payload };   
+        case INCREASE_AGE:
+            return { ...state, age: state.age+1 };                                  
         default:
             return state;                       
     }

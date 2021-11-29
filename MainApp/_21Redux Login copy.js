@@ -19,6 +19,7 @@ const db = SQLite.openDatabase(
 
 const Login = ({ navigation }) => {
 
+    // By using Hooks in the react-redux, we can use or change the values of the states.
     const {name, age}=useSelector(state => state.userReducer);
     const dispatch = useDispatch();
     // const [name, setName] = useState('');
