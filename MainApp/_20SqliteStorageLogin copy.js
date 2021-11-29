@@ -4,8 +4,6 @@ import { ASYNC_STORAGE_IMAGE } from '../assets/images/index';
 import CustomButton from '../utils/CustomButtons';
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 import SQLite from 'react-native-sqlite-storage';
-import { useSelector, useDispatch } from 'react-redux';
-import {setName, setAge} from '../redux/actions'
 
 //Using below function the database file is created and we open it in db constant. This method can also be used to open pre-built databases.
 const db = SQLite.openDatabase(
@@ -19,10 +17,8 @@ const db = SQLite.openDatabase(
 
 const Login = ({ navigation }) => {
 
-    const {name, age}=useSelector(state => state.userReducer);
-    const dispatch = useDispatch();
-    // const [name, setName] = useState('');
-    // const [age, setAge] = useState('');
+    const [name, setName] = useState('');
+    const [age, setAge] = useState('');
 
     //This wil call the getData() when login screen is loaded and if there is data in 'UserName' key it will redirect to 'Home' page
     useEffect(() => {
@@ -77,8 +73,6 @@ const Login = ({ navigation }) => {
             Alert.alert('Warning!', 'Please write your data.');
         } else {
             try {
-                dispatch(setName(name));
-                dispatch(setAge(age));
                 // var user = {
                 //     Name: name,
                 //     Age: age,
@@ -101,23 +95,6 @@ const Login = ({ navigation }) => {
         }
     }
 
-    /*REDUX
-    Redux is a predictable state container for JavaScript apps.
-    As application grows it is difficult to organize and maintain data flow.
-    Redux solves this problem by managing application's state with a single global object called Store.
-    Redux fundamental principles help in maintaining consistency throughout your application, which makes debugging and testing easier.
-    The Redux architecture is based on following components:
-    ACTIONS: Actions are a plain JavaScript object that contains information.
-    Actions are the only source of information for the store and have a type field that tells what kind of action to perform.
-    Reducers: Actions only tell what to do, but they don't tell how to do, so reducers are the pure functions that take the current state and action and return the new state and tell the pure functions that take the current state and action and return the new state and tell the store how to do.
-    STORE: The store is the object which holds the state of the application.
-
-    npm install redux
-    npm install react-redux
-    npm install redux-thunk
-
-    */
-
     return (
         <View
             style={styles.body}
@@ -130,18 +107,18 @@ const Login = ({ navigation }) => {
             <Text
                 style={styles.text}
             >
-                Redux
+                Async Storage
             </Text>
             <TextInput
                 style={styles.input}
                 placeholder='Enter your name'
-                onChangeText={(value) => dispatch(setName(value))}
+                onChangeText={(value) => setName(value)}
             >
             </TextInput>
             <TextInput
                 style={styles.input}
                 placeholder='Enter your age'
-                onChangeText={(value) => dispatch(setAge(value))}
+                onChangeText={(value) => setAge(value)}
             >
             </TextInput>
             <CustomButton

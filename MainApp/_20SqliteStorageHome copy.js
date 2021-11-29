@@ -10,8 +10,6 @@ import { TextInput } from 'react-native-gesture-handler';
 import GlobalStyle from '../utils/GlobalStyle';
 import CustomButton from '../utils/CustomButtons';
 import SQLite from 'react-native-sqlite-storage';
-import { useSelector, useDispatch } from 'react-redux';
-import {setName, setAge} from '../redux/actions'
 
 const db = SQLite.openDatabase(
   {
@@ -22,12 +20,10 @@ const db = SQLite.openDatabase(
   error => { console.log(error) }
 );
 
-const Home = ({ navigation, route }) => {
+const Home = ({ navigation }) => {
 
-  const {name, age}=useSelector(state => state.userReducer);
-    const dispatch = useDispatch();
-  // const [name, setName] = useState('');
-  // const [age, setAge] = useState('');
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
 
   //useEffect used for calling getData fn. when Home page opens
   useEffect(() => {
@@ -55,8 +51,8 @@ const Home = ({ navigation, route }) => {
             if (len > 0) {
               var userName = results.rows.item(0).Name;
               var userAge = results.rows.item(0).Age;
-              dispatch(setName(name));
-              dispatch(setAge(age));
+              setName(userName);
+              setAge(userAge);
             }
           }
         )
@@ -123,7 +119,7 @@ const Home = ({ navigation, route }) => {
         style={styles.input}
         placeholder="Ener your name"
         value={name}
-        onChangeText={(value) => dispatch(setName(value))}
+        onChangeText={(value) => setName(value)}
       />
       <CustomButton
         title='Update'

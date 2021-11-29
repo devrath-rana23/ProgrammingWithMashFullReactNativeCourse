@@ -4,15 +4,11 @@ import Home from './screens/Home';
 import Login from './screens/Login';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Provider } from 'react-redux';
-import { Store } from './redux/store';
-
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <Provider store={Store}>
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName='Login'
@@ -33,7 +29,6 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
-    </Provider>
   );
 };
 
