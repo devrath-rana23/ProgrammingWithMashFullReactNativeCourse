@@ -21,3 +21,5 @@ npx react-native link
 npx react-native run-android
 
 Refer fontawesome.com
+
+Push notification package configuration for android=> https://github.com/zo0r/react-native-push-notification
