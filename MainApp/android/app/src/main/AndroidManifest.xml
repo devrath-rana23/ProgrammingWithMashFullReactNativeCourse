@@ -25,6 +25,9 @@
         </intent-filter>
       </activity>
 
+      <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="AIzaSyA3rK8MQ1pzsLNHObiRQOHfCwgF6IwT1iY"/>
       <!-- Change the value to true to enable pop-up for in foreground on receiving remote notifications (for prevent duplicating while showing local notifications set this to false) -->
       <meta-data  android:name="com.dieam.reactnativepushnotification.notification_foreground"
                   android:value="false"/>
