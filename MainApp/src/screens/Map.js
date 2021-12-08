@@ -8,7 +8,7 @@ import MapView from "react-native-maps";
 
 const Map = ({ route }) => {
 
-    const { city,lat,lng } = route.params;
+    const { city, lat, lng } = route.params;
 
     return (
         <View style={styles.body}>
