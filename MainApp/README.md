@@ -26,3 +26,18 @@ Push notification package configuration for android=> https://github.com/zo0r/re
 
 Maps package
 https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md
+
+Connect PHYSICAL ANDROID device
+lsusb
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="12d1", MODE="0666", GROUP="plugdev"' | sudo tee /etc/udev/rules.d/51-android-usb.rules
+adb devices
+
+RUN Tests USING Jest=>
+Remove predefined file=>__tests__/App.test.js
+Refer this site for further steps=>https://jestjs.io/docs/getting-started
+
+SNAPSHOT TEST=>
+They are a very useful tool whenever you want to make sure your UI does not change unexpectedly.
+A typical snapshot test case renders a UI component, takes a sapshot , then compares it to a reference snapshot file stored alongside the test.
+The test will fail if the two snapshots do not match.
+jest -u in package.json file will allow updation of created snapshots even with UI differences and Change in UI will not effect the passing of test else it will compare with already created snapshot and fails the test even if there is only change in UI

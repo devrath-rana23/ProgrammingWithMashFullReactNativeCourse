@@ -39,7 +39,7 @@ const App = () => {
               headerShown: false
             }}
           />
-           <Stack.Screen
+          <Stack.Screen
             name='Camera'
             component={Camera}
             options={{
