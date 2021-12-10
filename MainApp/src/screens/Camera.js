@@ -2,31 +2,44 @@ import React from "react";
 import {
     View,
     StyleSheet,
+    Alert,
 } from "react-native";
 import { RNCamera } from "react-native-camera";
 import { useCamera } from "react-native-camera-hooks";
 import CustomButton from "../utils/CustomButtons";
-import RNFS from "react-native-fs";//Using the react-native-fs module we want to move the saved image file to the place we have access to
+import { useDispatch, useSelector } from 'react-redux';
+import { setTasks } from '../redux/actions';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Camera = () => {
+const Camera = ({ navigation, route }) => {
+
     const [{ cameraRef }, { takePicture }] = useCamera(null);
-    // Here async/await is used so that after saving the image we can see the saved address in the console
+    const { tasks } = useSelector(state => state.taskReducer);
+    const dispatch = useDispatch();
+
     const captureHandle = async () => {
         try {
             const data = await takePicture();
-            console.log(data.uri);
             const filePath = data.uri;
-            const newFilePath = RNFS.ExternalCachesDirectoryPath + '/MyTest.jpg';//destination address as one of the default address of this module which is actually inside the data app folder then concatenate the desired name of this photo at the end of this address
-            RNFS.moveFile(filePath, newFilePath)//RNFS.moveFile(source address, destination address)
-                .then(() => {
-                    console.log('Image Moved from--', filePath, '--to-- ', newFilePath);//here after the transfer is complete, I want to display both addresses in console.
-                })
-                .catch(error => {
-                    // if error occurs during tranfer need to display in console
-                    console.log(error);
-                })
+            updateTask(route.params.id, filePath);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const updateTask = (id, path) => {
+        const index = tasks.findIndex(task => task.ID === id);
+        console.log("HI__" + index);
+        if (index > -1) {
+            let newTasks = [...tasks];
+            newTasks[index].Image = path;
+            AsyncStorage.setItem('Tasks', JSON.stringify(newTasks))
+                .then(() => {
+                    dispatch(setTasks(newTasks));
+                    Alert.alert('Success!', 'Task image is saved.');
+                    navigation.goBack();
+                })
+                .catch(err => console.log(err))
         }
     }
 

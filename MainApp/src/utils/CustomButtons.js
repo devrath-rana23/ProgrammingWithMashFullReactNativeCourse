@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
     },
     button: {
         marginVertical: 10,
+        padding:10,
+        borderRadius:7,
         alignItems: 'center',
     },
 });

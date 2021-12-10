@@ -1,12 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    CustomFont: {
-        fontFamily: 'DancingScript-Regular',
+    CustomFontBig: {
+        fontFamily: 'DancingScript-VariableFont_wght',
     },
-    ButtonText: {
-        fontFamily: 'DancingScript-Bold',
-        fontSize: 25,
-        padding: 10,
+    CustomFontHW: {
+        fontFamily: ' DancingScript-Bold',
     },
 });

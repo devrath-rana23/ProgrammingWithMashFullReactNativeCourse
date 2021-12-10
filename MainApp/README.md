@@ -41,3 +41,8 @@ They are a very useful tool whenever you want to make sure your UI does not chan
 A typical snapshot test case renders a UI component, takes a sapshot , then compares it to a reference snapshot file stored alongside the test.
 The test will fail if the two snapshots do not match.
 jest -u in package.json file will allow updation of created snapshots even with UI differences and Change in UI will not effect the passing of test else it will compare with already created snapshot and fails the test even if there is only change in UI
+
+https://reactnative.dev/docs/signed-apk-android=>publishing app in google playstore
+cd android
+./gradlew bundleRelease=>.abb file for playstore
+./gradlew assembleRelease=>for apk
